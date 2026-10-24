@@ -3,156 +3,197 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Chitrakissa — your family, painted into a film in 3 hours</title>
-<meta name="description" content="Send 5 photos on Instagram. In 3 hours you get a painted film of your family to share for Diwali. From ₹299, and you pay after you see it.">
-<meta property="og:title" content="Chitrakissa — your family, painted into a film">
-<meta property="og:description" content="Send 5 photos on Instagram. In 3 hours, a painted Diwali film of your family. From ₹299 — pay after you see it.">
-<meta property="og:image" content="media/film_poster.jpg">
-<meta name="theme-color" content="#1c1430">
+<title>Chitrakissa — your story, painted</title>
+<meta name="description" content="Painted Diwali films of your own family, in your city and your language, ready in 3 hours from ₹299. And your love story as a hand-painted comic. You see it before you pay.">
+<meta property="og:title" content="Chitrakissa — your story, painted">
+<meta property="og:description" content="Your family, painted into a Diwali film in 3 hours. From ₹299, pay after you see it.">
+<meta property="og:image" content="media/diwali_raos_poster.jpg">
+<meta name="theme-color" content="#1a1226">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;700&family=Rozha+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;700&family=Rozha+One&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
 <style>
-/* Chitrakissa — the shop window. A Diwali night: indigo dark, lit by diya gold. One moving thing: the film in the hero, glowing.
-   Edit CONFIG at the bottom (Instagram, Telegram, UPI ID). */
+/* Chitrakissa — the shop. A Diwali night: deep violet, lit by diya gold. Two doors (Diwali film, love-story comic), one action
+   (message us), and a small order builder that writes that message for you. Edit CONFIG at the bottom (Instagram, Telegram, UPI). */
 :root {
-  --raat: #1c1430; --raat-2: #261b40; --raat-3: #33264f; --line: rgba(251, 242, 226, .14);
-  --diya: #f3b94d; --marigold: #ee8a1c; --rani: #d63a6e; --cream: #fbf2e2; --cream-2: #cdbfa8; --cream-3: #9d8f7c;
-  --display: "Rozha One", Georgia, serif; --body: "Mukta", system-ui, sans-serif;
+  --raat: #1a1226; --raat-2: #231833; --raat-3: #2e2142; --line: rgba(251, 242, 226, .12);
+  --diya: #f3b94d; --marigold: #ee8a1c; --rani: #d63a6e; --cream: #fbf2e2; --cream-2: #cfc1aa; --cream-3: #9a8c7a;
+  --display: "Rozha One", Georgia, serif; --body: "Mukta", system-ui, sans-serif; --deva: "Tiro Devanagari Hindi", serif;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html, body { overflow-x: clip; }
 body { margin: 0; background: var(--raat); color: var(--cream); font: 18px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
 img, video { display: block; max-width: 100%; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--diya); outline-offset: 3px; border-radius: 6px; }
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
-h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.08; letter-spacing: .002em; }
-h2 { font-size: clamp(34px, 6vw, 56px); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.08; }
+h2 { font-size: clamp(34px, 5.6vw, 54px); }
 p { margin: 0; }
+.eyebrow { font: 700 13px/1 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--diya); }
 
-/* buttons: messaging us is the only real action on this page */
-.wa { display: inline-flex; align-items: center; gap: 12px; background: var(--diya); color: #2a1a05; text-decoration: none; font: 700 19px/1 var(--body);
-  padding: 18px 26px; border-radius: 999px; box-shadow: 0 10px 34px -10px rgba(243, 185, 77, .7); }
-.wa:hover { background: #ffc960; }
-.wa svg { width: 22px; height: 22px; flex: none; }
-.wa-note { font-size: 15px; color: var(--cream-2); margin-top: 12px; }
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--diya); color: #2a1a05; text-decoration: none; border: 0; cursor: pointer;
+  font: 700 18px/1 var(--body); padding: 17px 26px; border-radius: 999px; box-shadow: 0 10px 34px -12px rgba(243, 185, 77, .7); transition: background .15s, transform .15s; }
+.btn:hover { background: #ffc960; transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: var(--cream); box-shadow: inset 0 0 0 1.5px rgba(251, 242, 226, .35); }
+.btn.ghost:hover { box-shadow: inset 0 0 0 1.5px var(--diya); color: var(--diya); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.note-s { font-size: 15px; color: var(--cream-2); }
 
 /* top */
-.top { position: absolute; inset: 0 0 auto; z-index: 5; }
-.top .wrap { display: flex; align-items: center; height: 68px; }
-.mark { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 400 24px var(--display); }
-.mark i { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; font-style: normal; font-size: 19px; color: var(--cream);
+.top { position: sticky; top: 0; z-index: 30; background: rgba(26, 18, 38, .82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; height: 62px; gap: 18px; }
+.mark { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 400 23px var(--display); }
+.mark i { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; font: normal 17px var(--deva); color: var(--cream);
   background: radial-gradient(circle, var(--raat) 58%, transparent 60%), conic-gradient(from 200deg, var(--diya), var(--marigold), var(--rani), var(--marigold), var(--diya)); }
-.top nav { margin-left: auto; display: flex; gap: 22px; font-size: 16px; }
+.top nav { margin-left: auto; display: flex; gap: 22px; font-size: 16px; align-items: center; }
 .top nav a { text-decoration: none; color: var(--cream-2); }
 .top nav a:hover { color: var(--cream); }
+.top nav .season { color: #2a1a05; background: var(--diya); padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 15px; }
 @media (max-width: 640px) { .top nav .opt { display: none; } }
 
-/* hero: the film glows like a diya flame */
-.hero { position: relative; padding: 108px 0 72px; overflow: hidden; }
-.hero .grid { display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: center; }
-.hero h1 { font-size: clamp(46px, 8.4vw, 86px); }
-.hero .lede { font-size: 21px; color: var(--cream-2); max-width: 30ch; margin: 22px 0 30px; }
-.film { position: relative; justify-self: center; width: min(380px, 100%); }
-.film::before { content: ''; position: absolute; inset: -18% -30%; z-index: 0; pointer-events: none;
-  background: radial-gradient(closest-side, rgba(243, 185, 77, .42), rgba(238, 138, 28, .16) 55%, transparent 75%); animation: breathe 5.5s ease-in-out infinite; }
-@keyframes breathe { 50% { opacity: .62; transform: scale(.96); } }
-@media (prefers-reduced-motion: reduce) { .film::before { animation: none; } }
-.film video { position: relative; z-index: 1; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 22px; background: #000;
-  box-shadow: 0 0 0 1px rgba(243, 185, 77, .35), 0 40px 80px -30px rgba(0, 0, 0, .8); }
-.sound { position: absolute; z-index: 2; right: 12px; bottom: 40px; border: 0; cursor: pointer; border-radius: 999px; padding: 9px 14px;
-  background: rgba(28, 20, 48, .72); color: var(--cream); font: 500 14px var(--body); backdrop-filter: blur(6px); }
-.film small { position: relative; z-index: 1; display: block; text-align: center; margin-top: 10px; font-size: 13px; color: var(--cream-3); }
-@media (max-width: 860px) {
-  .hero { padding: 84px 0 56px; } .hero .grid { grid-template-columns: 1fr; gap: 36px; }
-  .film { width: min(240px, 60vw); order: -1; }
-  .film small { display: none; }
-}
+/* hero: the brand line, then two doors */
+.hero { padding: 64px 0 40px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: -30% -10% auto; height: 520px; pointer-events: none;
+  background: radial-gradient(50% 60% at 50% 30%, rgba(243, 185, 77, .16), transparent 70%); }
+.hero h1 { font-size: clamp(48px, 8vw, 92px); text-align: center; position: relative; }
+.hero .lede { text-align: center; color: var(--cream-2); font-size: 21px; max-width: 34ch; margin: 18px auto 44px; position: relative; }
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; position: relative; }
+.door { position: relative; display: grid; grid-template-columns: 170px 1fr; gap: 22px; padding: 22px; border-radius: 24px; text-decoration: none;
+  background: linear-gradient(160deg, var(--raat-3), var(--raat-2)); border: 1px solid var(--line); transition: border-color .2s, transform .2s; }
+.door:hover { border-color: rgba(243, 185, 77, .55); transform: translateY(-2px); }
+.door .pic { aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 20px 40px -20px #000; }
+.door .pic video, .door .pic img { width: 100%; height: 100%; object-fit: cover; }
+.door .txt { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.door h3 { font-size: clamp(28px, 3vw, 36px); }
+.door p { color: var(--cream-2); font-size: 16.5px; }
+.door .meta { font-size: 15px; color: var(--diya); font-weight: 700; }
+.door .go { margin-top: 6px; align-self: flex-start; }
+.door .ribbon { align-self: flex-start; font: 700 12px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; padding: 7px 11px; border-radius: 999px; background: var(--rani); color: #fff; }
+.soon { margin-top: 18px; text-align: center; font-size: 16px; color: var(--cream-3); position: relative; }
+.soon b { color: var(--cream-2); font-weight: 500; }
+@media (max-width: 860px) { .doors { grid-template-columns: 1fr; } .door { grid-template-columns: 112px 1fr; gap: 16px; padding: 16px; } .hero { padding-top: 44px; }
+  .door .go { padding: 13px 18px; font-size: 16px; white-space: nowrap; } .door p { font-size: 15.5px; } }
 
-/* the clock: the 3-hour promise, as the sequence it is */
-.clock { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--raat-2); }
-.clock ol { list-style: none; margin: 0 auto; padding: 0; max-width: 1120px; display: grid; grid-template-columns: repeat(3, 1fr); }
-.clock li { padding: 30px 20px 32px; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; align-items: baseline; }
-.clock li + li { border-left: 1px solid var(--line); }
-.clock time { font: 400 40px/1 var(--display); color: var(--diya); grid-row: span 2; }
-.clock b { font-size: 19px; font-weight: 700; }
-.clock span { color: var(--cream-2); font-size: 16px; line-height: 1.45; }
-@media (max-width: 760px) { .clock ol { grid-template-columns: 1fr; } .clock li + li { border-left: 0; border-top: 1px solid var(--line); } .clock li { padding: 22px 20px; } }
-
-section { padding: 88px 0; }
-.head { max-width: 640px; margin-bottom: 36px; }
+section { padding: 84px 0; }
+.head { max-width: 660px; margin-bottom: 36px; }
+.head .eyebrow { display: block; margin-bottom: 14px; }
 .head p { margin-top: 14px; color: var(--cream-2); }
 
-/* occasions: watch the samples */
-.reels { display: grid; grid-template-columns: 1fr 1fr; max-width: 760px; gap: 22px; align-items: start; }
-.reel video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 16px; background: #000; }
-.reel h3 { font-size: 26px; margin-top: 16px; }
-.reel p { color: var(--cream-2); font-size: 16px; margin-top: 4px; }
-.reel .tag { display: inline-block; margin-top: 10px; font-size: 14px; color: var(--diya); }
-@media (max-width: 860px) { .reels { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 72%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; }
-  .reel { scroll-snap-align: start; } }
+/* Diwali: the sample film beside what makes it theirs */
+.diwali { overflow: hidden; }
+.diwali .grid { display: grid; grid-template-columns: 360px 1fr; gap: 60px; align-items: center; }
+.film { position: relative; }
+.film::before { content: ''; position: absolute; inset: -14% -26%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(243, 185, 77, .34), rgba(238, 138, 28, .12) 55%, transparent 75%); animation: breathe 5.5s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: .6; transform: scale(.96); } }
+@media (prefers-reduced-motion: reduce) { .film::before { animation: none; } }
+.film video { position: relative; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 22px; background: #000; box-shadow: 0 0 0 1px rgba(243, 185, 77, .3), 0 40px 80px -30px #000; }
+.sound { position: absolute; right: 12px; bottom: 12px; border: 0; cursor: pointer; border-radius: 999px; padding: 9px 14px; background: rgba(26, 18, 38, .75); color: var(--cream); font: 500 14px var(--body); backdrop-filter: blur(6px); }
+.film small { display: block; text-align: center; margin-top: 12px; font-size: 13px; color: var(--cream-3); position: relative; }
+.yours { list-style: none; padding: 0; margin: 0 0 30px; display: grid; gap: 18px; }
+.yours li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; }
+.yours i { font-style: normal; font-size: 24px; line-height: 1.2; }
+.yours b { display: block; font-size: 19px; }
+.yours span { color: var(--cream-2); font-size: 16px; }
+.worlds { border-top: 1px solid var(--line); padding-top: 22px; }
+.worlds h3 { font: 700 15px var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--cream-2); margin-bottom: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: 15px; color: var(--cream); background: var(--raat-2); }
+.chip em { font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--diya); margin-left: 6px; }
+@media (max-width: 860px) { .diwali .grid { grid-template-columns: 1fr; gap: 40px; } .film { width: min(300px, 78vw); margin: 0 auto; } }
 
-/* a note from the person who makes it */
-.note { background: var(--cream); color: #2c2033; }
-.note .wrap { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: start; max-width: 960px; }
-.note .seal { width: 180px; height: 180px; border-radius: 50%; display: grid; place-items: center; font: 400 96px/1 var(--display); color: var(--cream);
-  background: radial-gradient(circle, #2c2033 60%, transparent 61%), conic-gradient(from 200deg, var(--diya), var(--marigold), var(--rani), var(--marigold), var(--diya)); }
-.note blockquote { margin: 0; font: 400 clamp(26px, 3.6vw, 36px)/1.3 var(--display); }
-.note p { margin-top: 20px; font-size: 18px; color: #5a4a5e; max-width: 60ch; }
-.note .sig { margin-top: 18px; font-weight: 700; color: #2c2033; }
-@media (max-width: 760px) { .note .wrap { grid-template-columns: 1fr; gap: 24px; } .note .seal { width: 110px; height: 110px; font-size: 58px; } }
+/* the order builder: fills in the message, the customer just sends it */
+.order { background: var(--raat-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.order .grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 44px; align-items: start; }
+form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; }
+label { display: grid; gap: 6px; font-size: 15px; color: var(--cream-2); font-weight: 500; }
+label.full { grid-column: 1 / -1; }
+input, select, textarea { width: 100%; font: 17px/1.4 var(--body); color: var(--cream); background: var(--raat); border: 1px solid rgba(251, 242, 226, .2); border-radius: 12px; padding: 12px 14px; }
+input::placeholder, textarea::placeholder { color: #75695c; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--diya); box-shadow: 0 0 0 3px rgba(243, 185, 77, .18); }
+textarea { resize: vertical; min-height: 74px; }
+.plans { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.plans input { position: absolute; opacity: 0; pointer-events: none; }
+.plans label { position: relative; cursor: pointer; border: 1px solid rgba(251, 242, 226, .2); border-radius: 14px; padding: 12px 14px; gap: 2px; background: var(--raat); }
+.plans label b { color: var(--cream); font-size: 17px; }
+.plans label span { font: 400 22px var(--display); color: var(--diya); }
+.plans label:has(input:checked) { border-color: var(--diya); box-shadow: 0 0 0 3px rgba(243, 185, 77, .18); }
+.msg { position: sticky; top: 88px; background: var(--raat); border: 1px solid var(--line); border-radius: 20px; padding: 22px; }
+.msg h3 { font: 700 15px var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--cream-2); }
+.msg pre { white-space: pre-wrap; font: 16px/1.55 var(--body); margin: 14px 0 18px; padding: 16px; border-radius: 14px; background: #dcf8c6; color: #1d2a16; min-height: 160px; }
+.msg .btn { width: 100%; }
+.msg .alt { margin-top: 12px; text-align: center; }
+.msg .then { margin-top: 16px; font-size: 15px; color: var(--cream-2); border-top: 1px solid var(--line); padding-top: 14px; }
+.copied { color: var(--diya); font-weight: 700; }
+@media (max-width: 860px) { .order .grid { grid-template-columns: 1fr; } form { grid-template-columns: 1fr; } .plans { grid-template-columns: 1fr; } .msg { position: static; } }
 
-/* prices, set like a menu */
-.menu { max-width: 760px; }
-.item { padding: 24px 0; border-bottom: 1px solid var(--line); }
-.item:first-child { border-top: 1px solid var(--line); }
-.row { display: flex; align-items: baseline; gap: 14px; }
-.row h3 { font-size: 30px; white-space: nowrap; }
-.row .dots { flex: 1; border-bottom: 2px dotted rgba(243, 185, 77, .45); transform: translateY(-6px); min-width: 24px; }
-.row .amt { font: 400 34px var(--display); color: var(--diya); white-space: nowrap; }
-.item p { margin-top: 8px; color: var(--cream-2); font-size: 17px; max-width: 56ch; }
-.item .pick { display: inline-block; margin-top: 12px; color: var(--diya); font-weight: 700; text-decoration: none; border-bottom: 1px solid rgba(243, 185, 77, .4); }
-.item .fav { display: inline-block; margin-top: 10px; font: 500 13px var(--body); color: #2a1a05; background: var(--diya); padding: 3px 10px; border-radius: 999px; }
-@media (max-width: 560px) { .row h3 { font-size: 25px; } .row .amt { font-size: 28px; } }
+/* how it goes: the 3-hour clock */
+.clock ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.clock li { padding: 26px 22px; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: baseline; background: var(--raat-2); }
+.clock li + li { border-left: 1px solid var(--line); }
+.clock time { font: 400 38px/1 var(--display); color: var(--diya); grid-row: span 2; }
+.clock b { font-size: 18px; }
+.clock span { color: var(--cream-2); font-size: 15.5px; line-height: 1.45; }
+@media (max-width: 760px) { .clock ol { grid-template-columns: 1fr; } .clock li + li { border-left: 0; border-top: 1px solid var(--line); } }
 
 /* comics */
 .pages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .pages figure { margin: 0; }
-.pages img { width: 100%; border-radius: 10px; box-shadow: 0 24px 50px -24px rgba(0, 0, 0, .7); }
+.pages img { width: 100%; border-radius: 10px; box-shadow: 0 24px 50px -24px #000; }
 .pages figcaption { margin-top: 12px; font-size: 16px; color: var(--cream-2); }
-.pages figcaption b { color: var(--cream); font-family: var(--display); font-weight: 400; font-size: 20px; display: block; }
-@media (max-width: 860px) { .pages { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 74%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; } .pages figure { scroll-snap-align: start; } }
+.pages figcaption b { color: var(--cream); font: 400 21px var(--display); display: block; }
+.comic-cta { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+@media (max-width: 860px) { .pages { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 76%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; } .pages figure { scroll-snap-align: start; } }
 
-/* promises: plain sentences */
-.promises { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px 56px; max-width: 980px; }
-.promises div { padding-left: 20px; border-left: 2px solid var(--diya); }
-.promises b { display: block; font-size: 19px; }
+/* prices, set like a menu */
+.menu { max-width: 780px; }
+.item { padding: 22px 0; border-bottom: 1px solid var(--line); }
+.item:first-child { border-top: 1px solid var(--line); }
+.row { display: flex; align-items: baseline; gap: 14px; }
+.row h3 { font-size: 30px; white-space: nowrap; }
+.row .dots { flex: 1; border-bottom: 2px dotted rgba(243, 185, 77, .4); transform: translateY(-6px); min-width: 24px; }
+.row .amt { font: 400 34px var(--display); color: var(--diya); white-space: nowrap; }
+.item p { margin-top: 8px; color: var(--cream-2); font-size: 17px; max-width: 58ch; }
+.item .fav { display: inline-block; margin-top: 10px; font: 700 13px var(--body); color: #2a1a05; background: var(--diya); padding: 3px 10px; border-radius: 999px; }
+@media (max-width: 560px) { .row h3 { font-size: 25px; } .row .amt { font-size: 28px; } }
+
+/* the maker's note */
+.maker { background: var(--cream); color: #2c2033; }
+.maker .wrap { display: grid; grid-template-columns: 180px 1fr; gap: 44px; align-items: center; max-width: 940px; }
+.maker .seal { width: 160px; height: 160px; border-radius: 50%; display: grid; place-items: center; font: 400 84px/1 var(--deva); color: var(--cream);
+  background: radial-gradient(circle, #2c2033 60%, transparent 61%), conic-gradient(from 200deg, var(--diya), var(--marigold), var(--rani), var(--marigold), var(--diya)); }
+.maker blockquote { margin: 0; font: 400 clamp(25px, 3.4vw, 34px)/1.3 var(--display); }
+.maker p { margin-top: 16px; font-size: 17.5px; color: #5a4a5e; max-width: 60ch; }
+.maker .sig { margin-top: 14px; font-weight: 700; color: #2c2033; }
+@media (max-width: 760px) { .maker .wrap { grid-template-columns: 1fr; gap: 22px; } .maker .seal { width: 100px; height: 100px; font-size: 52px; } }
+
+.promises { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 56px; max-width: 980px; }
+.promises div { padding-left: 18px; border-left: 2px solid var(--diya); }
+.promises b { display: block; font-size: 18.5px; }
 .promises span { color: var(--cream-2); font-size: 16px; }
 @media (max-width: 760px) { .promises { grid-template-columns: 1fr; } }
-
-details { border-bottom: 1px solid var(--line); padding: 18px 0; max-width: 760px; }
-summary { cursor: pointer; font-size: 19px; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+details { border-bottom: 1px solid var(--line); padding: 16px 0; max-width: 780px; }
+summary { cursor: pointer; font-size: 18.5px; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
 summary::-webkit-details-marker { display: none; }
 summary::after { content: '+'; color: var(--diya); font-size: 24px; line-height: 1; }
 details[open] summary::after { content: '–'; }
 details p { margin-top: 10px; color: var(--cream-2); font-size: 17px; }
 
-/* last call */
-.last { text-align: center; padding: 96px 0 120px; background: radial-gradient(60% 70% at 50% 100%, rgba(243, 185, 77, .2), transparent 70%); }
-.last h2 { max-width: 16ch; margin: 0 auto 28px; }
-.last .wa { margin: 0 auto; }
-.last .pay { margin: 36px auto 0; width: max-content; max-width: 100%; display: flex; gap: 18px; align-items: center; text-align: left; background: var(--raat-2); border: 1px solid var(--line); border-radius: 18px; padding: 16px 20px; }
+.last { text-align: center; padding: 96px 0 120px; background: radial-gradient(60% 70% at 50% 100%, rgba(243, 185, 77, .18), transparent 70%); }
+.last h2 { max-width: 17ch; margin: 0 auto 26px; }
+.last .pay { margin: 34px auto 0; width: max-content; max-width: 100%; display: flex; gap: 18px; align-items: center; text-align: left; background: var(--raat-2); border: 1px solid var(--line); border-radius: 18px; padding: 16px 20px; }
 .last .pay canvas { background: #fff; border-radius: 10px; padding: 6px; }
 .last .pay p { font-size: 15px; color: var(--cream-2); max-width: 26ch; }
 .last .pay b { color: var(--cream); word-break: break-all; }
 footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14px; color: var(--cream-3); }
 .dock { display: none; }
 @media (max-width: 640px) {
-  .dock { display: flex; position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 20; justify-content: center; }
-  .dock .wa { width: 100%; justify-content: center; }
+  .dock { display: flex; position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 20; }
+  .dock .btn { width: 100%; }
   body { padding-bottom: 84px; }
-  .hero .wa { width: 100%; justify-content: center; }
 }
 </style>
 </head>
@@ -160,40 +201,117 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14p
 
 <header class="top"><div class="wrap">
   <a class="mark" href="#"><i>चि</i>Chitrakissa</a>
-  <nav><a class="opt" href="#films">Films</a><a class="opt" href="#comics">Comics</a><a href="#prices">Prices</a></nav>
+  <nav><a class="opt" href="#comics">Comics</a><a class="opt" href="#prices">Prices</a><a class="season" href="#diwali">🪔 Diwali</a></nav>
 </div></header>
 
-<section class="hero"><div class="wrap grid">
-  <div>
-    <h1>Send 5 photos. In 3 hours, your family is a painted film.</h1>
-    <p class="lede">For Diwali this year, send everyone something they'll watch twice: your own family, painted in, with your name and your words.</p>
-    <a class="wa js-wa" data-msg="Hi Chitrakissa! I'd like a Diwali film for my family 🪔" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM12 4.6c2.4 0 2.7 0 3.6.1 2.4.1 3.6 1.3 3.7 3.7.1.9.1 1.2.1 3.6s0 2.7-.1 3.6c-.1 2.4-1.3 3.6-3.7 3.7-.9.1-1.2.1-3.6.1s-2.7 0-3.6-.1c-2.4-.1-3.6-1.3-3.7-3.7-.1-.9-.1-1.2-.1-3.6s0-2.7.1-3.6C4.8 6 6 4.8 8.4 4.7c.9-.1 1.2-.1 3.6-.1ZM12 3c-2.4 0-2.8 0-3.7.1-3.3.1-5.1 2-5.2 5.2C3 9.2 3 9.6 3 12s0 2.8.1 3.7c.1 3.2 2 5.1 5.2 5.2.9.1 1.3.1 3.7.1s2.8 0 3.7-.1c3.2-.1 5.1-2 5.2-5.2.1-.9.1-1.3.1-3.7s0-2.8-.1-3.7c-.1-3.2-2-5.1-5.2-5.2C14.8 3 14.4 3 12 3Z"/></svg>Message us on Instagram</a>
-    <p class="wa-note">From ₹299. You see it first, then pay. Prefer Telegram? <a class="js-tg" href="#">@chitrakissa</a></p>
+<section class="hero"><div class="wrap">
+  <h1>Your story, painted.</h1>
+  <p class="lede">Elegant painted films and comics, made from your own photos, in your city and your language.</p>
+  <div class="doors">
+    <a class="door" href="#diwali">
+      <div class="pic"><video src="media/diwali_raos.mp4" poster="media/diwali_raos_poster.jpg" autoplay muted loop playsinline preload="metadata"></video></div>
+      <div class="txt"><span class="ribbon">Diwali · 8 Nov</span><h3>A Diwali film of your family</h3><p>Your faces lit in the windows of a painted home. Your dish, your rangoli, your city's sky, a greeting in your language.</p>
+        <span class="meta">From ₹299 · ready in 3 hours</span><span class="btn go">Make our Diwali film</span></div>
+    </a>
+    <a class="door" href="#comics">
+      <div class="pic"><img src="media/comic_umbrella.jpg" alt="A painted comic page of a couple in the Mumbai rain" loading="lazy"></div>
+      <div class="txt"><h3>Your love story, as a comic</h3><p>How you met, the day she said yes, your parents' first Sunday, told in 3 hand-painted pages with speech bubbles.</p>
+        <span class="meta">₹499 · ready the same day</span><span class="btn ghost go">Make our comic</span></div>
+    </a>
   </div>
+  <p class="soon">✈️ <b>Travel films</b>, your trip painted with a route map and window views, <b>coming soon</b>.</p>
+</div></section>
+
+<section class="diwali" id="diwali"><div class="wrap grid">
   <div class="film">
-    <video id="hero" src="media/film.mp4" poster="media/film_poster.jpg" autoplay muted loop playsinline></video>
-    <button class="sound" id="sound" type="button">Play with sound</button>
-    <small>Made from 6 ordinary phone photos (stock samples)</small>
+    <video id="raos" src="media/diwali_raos.mp4" poster="media/diwali_raos_poster.jpg" controls playsinline preload="none"></video>
+    <small>Sample: "the Raos of Vijayawada", made from 4 stock photos</small>
+  </div>
+  <div>
+    <div class="head"><span class="eyebrow">Diwali film</span><h2>Made of your family, not a template.</h2></div>
+    <ul class="yours">
+      <li><i>🪔</i><div><b>Your faces, lit in the windows</b><span>Each person appears in a carved jharokha as its lamp catches, with their name. The family photo stays on the door to the end.</span></div></li>
+      <li><i>🍬</i><div><b>Your city, your Diwali</b><span>Your region's home and sky, the dish your family always makes, and your floor art (rangoli, kolam, muggulu, alpana) turning around your photo.</span></div></li>
+      <li><i>📜</i><div><b>A real shloka</b><span>Verses from the scriptures, checked word for word against the source, with what they mean.</span></div></li>
+      <li><i>✍️</i><div><b>In your language and script</b><span>Hindi, Hinglish and English today. Telugu, Tamil, Kannada, Malayalam, Bengali, Marathi, Gujarati and Punjabi on request: we have the lines checked by a native speaker first.</span></div></li>
+    </ul>
+    <div class="worlds">
+      <h3>Pick your world</h3>
+      <div class="chips"><span class="chip">Today, in your own city</span><span class="chip">Ramayana-era Ayodhya<em>new</em></span><span class="chip">A Rajput palace<em>new</em></span><span class="chip">1940s Bombay · Calcutta · Madras · Delhi<em>new</em></span><span class="chip">2099<em>new</em></span></div>
+      <div class="chips"><span class="chip">Diwali abroad: New York<em>new</em></span><span class="chip">Paris<em>new</em></span><span class="chip">Dubai<em>new</em></span></div>
+      <p class="note-s">New worlds are freshly painted for you. We'll confirm the time when you message.</p>
+    </div>
+    <p style="margin-top:28px"><a class="btn" href="#order">Make our Diwali film</a></p>
   </div>
 </div></section>
 
-<div class="clock" id="how"><ol>
-  <li><time>0:00</time><b>You send photos</b><span>5 or 6 in an Instagram or Telegram message, with everyone's names and a line about your family.</span></li>
-  <li><time>0:15</time><b>We talk</b><span>A real person replies, asks what matters, and agrees your lines and language with you.</span></li>
-  <li><time>3:00</time><b>Your film arrives</b><span>A preview in your chat. Love it, pay by UPI, and get the full-HD film by a private link.</span></li>
-</ol></div>
-
-<section id="films"><div class="wrap">
-  <div class="head"><h2>See what yours could look like</h2><p>These are samples made from free stock photos. Yours will have your people, your places and your words.</p></div>
-  <div class="reels">
-    <div class="reel"><video src="media/before_after.mp4" poster="media/before_after_poster.jpg" controls playsinline preload="none"></video>
-      <h3>Before and after</h3><p>Six plain phone photos, painted into one story.</p><span class="tag">Story, ₹799</span></div>
-    <div class="reel"><video src="media/trip_reel.mp4" poster="media/trip_reel_poster.jpg" controls playsinline preload="none"></video>
-      <h3>A trip, painted</h3><p>Every place painted in, and a poster to keep at the end.</p><span class="tag">Story, ₹799</span></div>
+<section class="order" id="order"><div class="wrap">
+  <div class="head"><span class="eyebrow">Order in a minute</span><h2>Tell us about your family.</h2><p>Fill in what you like. We write the message for you; you just send it with your photos.</p></div>
+  <div class="grid">
+    <form id="f" onsubmit="return false">
+      <div class="plans" role="radiogroup" aria-label="Choose a film">
+        <label><input type="radio" name="plan" value="Greeting (₹299)"><b>Greeting</b><span>₹299</span>30 seconds</label>
+        <label><input type="radio" name="plan" value="Story (₹799)" checked><b>Story</b><span>₹799</span>Up to a minute</label>
+        <label><input type="radio" name="plan" value="Story and comic (₹1,999)"><b>Story + comic</b><span>₹1,999</span>Film + 3 pages</label>
+      </div>
+      <label>Your family's name<input name="family" placeholder="e.g. the Sharma family"></label>
+      <label>Your city<input name="city" placeholder="e.g. Lucknow"></label>
+      <label>World<select name="world">
+        <option>Today, in our own city</option><option>Ramayana-era Ayodhya</option><option>A Rajput palace</option><option>1940s</option><option>2099</option>
+        <option>Diwali abroad: New York</option><option>Diwali abroad: Paris</option><option>Diwali abroad: Dubai</option></select></label>
+      <label>Language<select name="lang">
+        <option>Hindi</option><option>Hinglish</option><option>English</option>
+        <optgroup label="On request (native-speaker checked)"><option>Telugu</option><option>Tamil</option><option>Kannada</option><option>Malayalam</option><option>Bengali</option><option>Marathi</option><option>Gujarati</option><option>Punjabi</option></optgroup></select></label>
+      <label class="full">What does your family always make for Diwali?<input name="dish" placeholder="e.g. Mummy's gujiya, Amma's Bandar laddu"></label>
+      <label class="full">Who's in it? (names, as you call them)<input name="people" placeholder="e.g. Papa, Mummy, Riya, Kabir, Dadi"></label>
+      <label class="full">A line from you (optional)<textarea name="line" placeholder="e.g. with love, from our home to yours"></textarea></label>
+    </form>
+    <aside class="msg" aria-live="polite">
+      <h3>Your message</h3>
+      <pre id="m"></pre>
+      <button class="btn js-send" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM12 4.6c2.4 0 2.7 0 3.6.1 2.4.1 3.6 1.3 3.7 3.7.1.9.1 1.2.1 3.6s0 2.7-.1 3.6c-.1 2.4-1.3 3.6-3.7 3.7-.9.1-1.2.1-3.6.1s-2.7 0-3.6-.1c-2.4-.1-3.6-1.3-3.7-3.7-.1-.9-.1-1.2-.1-3.6s0-2.7.1-3.6C4.8 6 6 4.8 8.4 4.7c.9-.1 1.2-.1 3.6-.1ZM12 3c-2.4 0-2.8 0-3.7.1-3.3.1-5.1 2-5.2 5.2C3 9.2 3 9.6 3 12s0 2.8.1 3.7c.1 3.2 2 5.1 5.2 5.2.9.1 1.3.1 3.7.1s2.8 0 3.7-.1c3.2-.1 5.1-2 5.2-5.2.1-.9.1-1.3.1-3.7s0-2.8-.1-3.7c-.1-3.2-2-5.1-5.2-5.2C14.8 3 14.4 3 12 3Z"/></svg>Copy and open Instagram</button>
+      <p class="alt note-s">or send it on Telegram: <a class="js-tg-send" href="#">@chitrakissa</a></p>
+      <p class="then">The message is copied for you: <b>paste it in the chat, then add 4 to 6 photos</b>: one of each person and one of you all together. A real person replies within minutes, and your preview arrives within 3 hours.</p>
+    </aside>
   </div>
 </div></section>
 
-<section class="note"><div class="wrap">
+<section class="clock"><div class="wrap">
+  <ol>
+    <li><time>0:00</time><b>You send it</b><span>Your message and photos, on Instagram or Telegram.</span></li>
+    <li><time>0:15</time><b>We talk</b><span>A real person replies and agrees the lines and language with you.</span></li>
+    <li><time>3:00</time><b>Your preview arrives</b><span>Love it, pay by UPI, and get the full-HD film by a private link.</span></li>
+  </ol>
+</div></section>
+
+<section id="comics"><div class="wrap">
+  <div class="head"><span class="eyebrow">Love-story comic</span><h2>Your story, page by page.</h2><p>Three hand-painted pages with speech bubbles, set where it happened, or in another era. ₹499, ready the same day. These sample couples are made up.</p></div>
+  <div class="pages">
+    <figure><img src="media/comic_umbrella.jpg" alt="Comic page: a couple on Marine Drive in the monsoon, talking in speech bubbles" loading="lazy"><figcaption><b>Umbrella Toh Bahana Tha</b>A first date in the Mumbai rain</figcaption></figure>
+    <figure><img src="media/comic_hennu.jpg" alt="Comic page: two families meeting over filter coffee in Mysuru" loading="lazy"><figcaption><b>Hennu Nodo</b>One Sunday, one filter coffee, one shy "haan"</figcaption></figure>
+    <figure><img src="media/comic_chhatri.jpg" alt="Comic page: the same couple in Rajputana in 1750" loading="lazy"><figcaption><b>Chhatri Toh Bahana Thi</b>The same love story, set in 1750</figcaption></figure>
+  </div>
+  <div class="comic-cta"><a class="btn js-ig-msg" data-msg="Namaste Chitrakissa! I'd like our love story as a comic (₹499)." href="#">Make our comic</a>
+    <span class="note-s">Comics are painted with an AI image tool, so we always ask before using your photos. Tap and the message is copied: paste it in the chat.</span></div>
+</div></section>
+
+<section id="prices"><div class="wrap">
+  <div class="head"><span class="eyebrow">Prices</span><h2>Pay after you've seen it.</h2></div>
+  <div class="menu">
+    <div class="item"><div class="row"><h3>Greeting</h3><span class="dots"></span><span class="amt">₹299</span></div>
+      <p>A 30-second Diwali film: your family lit in the windows, your greeting and your name. 3 to 6 photos. Ready in 3 hours.</p></div>
+    <div class="item"><div class="row"><h3>Story</h3><span class="dots"></span><span class="amt">₹799</span></div>
+      <span class="fav">Most families pick this</span>
+      <p>The full film, up to a minute: your city, your dish, your rangoli, a shloka, and lines written from your words in your language. Up to 10 photos. Ready in 3 hours.</p></div>
+    <div class="item"><div class="row"><h3>Comic</h3><span class="dots"></span><span class="amt">₹499</span></div>
+      <p>Your love story as 3 hand-painted comic pages with speech bubbles, set where it happened or in another era. Ready the same day.</p></div>
+    <div class="item"><div class="row"><h3>Story and comic</h3><span class="dots"></span><span class="amt">₹1,999</span></div>
+      <p>The Diwali Story film plus your family's story as a 3-page painted comic. Made for gifting: parents, grandparents, the two of you. Ready the same day.</p></div>
+  </div>
+  <p style="margin-top:30px"><a class="btn" href="#order">Start your order</a></p>
+</div></section>
+
+<section class="maker"><div class="wrap">
   <div class="seal" aria-hidden="true">चि</div>
   <div>
     <blockquote>"I make every Chitrakissa myself, and I'll talk to you myself while I do."</blockquote>
@@ -202,60 +320,35 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14p
   </div>
 </div></section>
 
-<section id="prices"><div class="wrap">
-  <div class="head"><h2>Prices</h2><p>Pay only after you've seen your preview.</p></div>
-  <div class="menu">
-    <div class="item"><div class="row"><h3>Greeting</h3><span class="dots"></span><span class="amt">₹299</span></div>
-      <p>A 30-second Diwali film: a diya for every face, your family name and message. 3 to 6 photos. Ready in 3 hours.</p>
-      <a class="pick js-wa" data-msg="Hi Chitrakissa! I'd like the ₹299 Greeting." href="#">Order a Greeting</a></div>
-    <div class="item"><div class="row"><h3>Story</h3><span class="dots"></span><span class="amt">₹799</span></div>
-      <span class="fav">Most families pick this</span>
-      <p>A film up to a minute, built around your story, with lines written from your words in your language (Hindi, Hinglish, English and more), plus a painted poster. Up to 10 photos. Ready in 3 hours.</p>
-      <a class="pick js-wa" data-msg="Hi Chitrakissa! I'd like the ₹799 Story." href="#">Order a Story</a></div>
-    <div class="item"><div class="row"><h3>Story and comic</h3><span class="dots"></span><span class="amt">₹1,999</span></div>
-      <p>Everything in Story, plus your story as a 3-page painted comic with speech bubbles. Made for gifting: anniversaries, parents, the two of you. Ready the same day.</p>
-      <a class="pick js-wa" data-msg="Hi Chitrakissa! I'd like the ₹1,999 Story and comic." href="#">Order a Story and comic</a></div>
-  </div>
-</div></section>
-
-<section id="comics"><div class="wrap">
-  <div class="head"><h2>Your story, page by page</h2><p>How you met, the day she said yes, your parents' first Sunday: told as a hand-painted comic. These sample couples are made up.</p></div>
-  <div class="pages">
-    <figure><img src="media/comic_umbrella.jpg" alt="Comic page: a couple on Marine Drive in the monsoon, talking in speech bubbles" loading="lazy"><figcaption><b>Umbrella Toh Bahana Tha</b>A first date in the Mumbai rain</figcaption></figure>
-    <figure><img src="media/comic_hennu.jpg" alt="Comic page: two families meeting over filter coffee in Mysuru" loading="lazy"><figcaption><b>Hennu Nodo</b>One Sunday, one filter coffee, one shy "haan"</figcaption></figure>
-    <figure><img src="media/comic_chhatri.jpg" alt="Comic page: the same couple in Rajputana in 1750" loading="lazy"><figcaption><b>Chhatri Toh Bahana Thi</b>The same love story, set in 1750</figcaption></figure>
-  </div>
-</div></section>
-
 <section><div class="wrap">
   <div class="head"><h2>What we promise</h2></div>
   <div class="promises">
     <div><b>You see it before you pay</b><span>The preview comes in your chat. One round of changes is included.</span></div>
-    <div><b>Ready in 3 hours</b><span>For orders between 9 am and 9 pm. Comics are ready the same day.</span></div>
-    <div><b>Your photos stay private</b><span>Films are made on our own computer and never posted anywhere. Comics are drawn with an AI image tool, so we ask before using your photos for one.</span></div>
-    <div><b>Your words, not made-up facts</b><span>Names, places and dates exactly as you give them. We delete your photos 30 days after delivery, or sooner if you ask.</span></div>
+    <div><b>Ready in 3 hours</b><span>For orders between 9 am and 9 pm. Comics are ready the same day; for a new world we confirm the time when you message.</span></div>
+    <div><b>Your photos stay private</b><span>Films are made on our own computer and never posted. We delete your photos 30 days after delivery, or sooner if you ask.</span></div>
+    <div><b>Your words, exactly</b><span>Names, places and lines as you give them, and verses checked against the scriptures.</span></div>
   </div>
 </div></section>
 
-<section><div class="wrap">
+<section style="padding-top:0"><div class="wrap">
   <div class="head"><h2>Questions</h2></div>
-  <details><summary>Which photos work best?</summary><p>Clear phone photos where faces are visible. One of each person and one of you all together is perfect. Old photos work too.</p></details>
-  <details><summary>Can the lines be in Hindi, Hinglish or my language?</summary><p>Yes. Hindi, Hinglish and English are ready today. For other languages we check the lines with a native speaker, which can take a little longer.</p></details>
+  <details><summary>Which photos work best?</summary><p>Clear phone photos where faces are visible: one of each person and one of you all together. Old photos work too.</p></details>
+  <details><summary>Can the lines be in my language?</summary><p>Hindi, Hinglish and English are ready today. For Telugu, Tamil, Kannada, Malayalam, Bengali, Marathi, Gujarati or Punjabi, we have the lines checked by a native speaker before we send, which can take a little longer.</p></details>
   <details><summary>Will it fit WhatsApp and Instagram?</summary><p>Yes. You get a full-quality film for Instagram and a lighter one that sends quickly on WhatsApp.</p></details>
-  <details><summary>How do I get the full-quality film?</summary><p>The preview comes in your chat. After you pay, you get the full-HD film by a private download link (or as a file on Telegram). The link is deleted after 30 days.</p></details>
-  <details><summary>Instagram makes my photos blurry. What should I do?</summary><p>Instagram compresses photos a little, which is usually fine. For the sharpest result, send them on Telegram to @chitrakissa using "Send as file".</p></details>
-  <details><summary>Can I order for a birthday or anniversary instead?</summary><p>Yes. Tell us the occasion when you message us. Love stories and anniversaries are our favourite.</p></details>
+  <details><summary>How do I get the full-quality film?</summary><p>After you pay, by a private download link or as a file on Telegram. The link is deleted after 30 days.</p></details>
+  <details><summary>Instagram makes my photos blurry. What should I do?</summary><p>Send them on Telegram to @chitrakissa using "Send as file" for the sharpest result.</p></details>
+  <details><summary>Can I order for a birthday or anniversary?</summary><p>Yes, tell us the occasion when you message us. Love stories are our favourite.</p></details>
 </div></section>
 
 <section class="last"><div class="wrap">
   <h2>Your family's Diwali film could be ready tonight.</h2>
-  <a class="wa js-wa" data-msg="Hi Chitrakissa! I'd like a Diwali film for my family 🪔" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM12 4.6c2.4 0 2.7 0 3.6.1 2.4.1 3.6 1.3 3.7 3.7.1.9.1 1.2.1 3.6s0 2.7-.1 3.6c-.1 2.4-1.3 3.6-3.7 3.7-.9.1-1.2.1-3.6.1s-2.7 0-3.6-.1c-2.4-.1-3.6-1.3-3.7-3.7-.1-.9-.1-1.2-.1-3.6s0-2.7.1-3.6C4.8 6 6 4.8 8.4 4.7c.9-.1 1.2-.1 3.6-.1ZM12 3c-2.4 0-2.8 0-3.7.1-3.3.1-5.1 2-5.2 5.2C3 9.2 3 9.6 3 12s0 2.8.1 3.7c.1 3.2 2 5.1 5.2 5.2.9.1 1.3.1 3.7.1s2.8 0 3.7-.1c3.2-.1 5.1-2 5.2-5.2.1-.9.1-1.3.1-3.7s0-2.8-.1-3.7c-.1-3.2-2-5.1-5.2-5.2C14.8 3 14.4 3 12 3Z"/></svg>Message us on Instagram</a>
-  <p class="wa-note">or on Telegram: <a class="js-tg" href="#">@chitrakissa</a></p>
+  <a class="btn" href="#order">Make our Diwali film</a>
+  <p class="note-s" style="margin-top:14px">or message us directly on <a class="js-ig" href="#">Instagram</a> or <a class="js-tg" href="#">Telegram</a></p>
   <div class="pay"><canvas id="qr" width="112" height="112" aria-label="UPI QR code"></canvas><p>After your preview, pay by UPI to<br><b id="upiId"></b><br><a class="js-upi" href="#">Open your UPI app</a></p></div>
 </div></section>
 
-<footer><div class="wrap">Chitrakissa, your story painted. Instagram <a class="js-ig" href="#">@chitrakissa</a>. Sample films use free Unsplash stock photos (Diwali sample: photo by CR); sample comics show made-up people.</div></footer>
-<div class="dock"><a class="wa js-wa" data-msg="Hi Chitrakissa! I'd like a Diwali film for my family 🪔" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM12 4.6c2.4 0 2.7 0 3.6.1 2.4.1 3.6 1.3 3.7 3.7.1.9.1 1.2.1 3.6s0 2.7-.1 3.6c-.1 2.4-1.3 3.6-3.7 3.7-.9.1-1.2.1-3.6.1s-2.7 0-3.6-.1c-2.4-.1-3.6-1.3-3.7-3.7-.1-.9-.1-1.2-.1-3.6s0-2.7.1-3.6C4.8 6 6 4.8 8.4 4.7c.9-.1 1.2-.1 3.6-.1ZM12 3c-2.4 0-2.8 0-3.7.1-3.3.1-5.1 2-5.2 5.2C3 9.2 3 9.6 3 12s0 2.8.1 3.7c.1 3.2 2 5.1 5.2 5.2.9.1 1.3.1 3.7.1s2.8 0 3.7-.1c3.2-.1 5.1-2 5.2-5.2.1-.9.1-1.3.1-3.7s0-2.8-.1-3.7c-.1-3.2-2-5.1-5.2-5.2C14.8 3 14.4 3 12 3Z"/></svg>Message us, from ₹299</a></div>
+<footer><div class="wrap">Chitrakissa, your story painted. Instagram <a class="js-ig" href="#">@chitrakissa</a>. The sample film uses free Unsplash stock photos (photo by CR); sample comics show made-up people.</div></footer>
+<div class="dock"><a class="btn" href="#order">🪔 Make our Diwali film, from ₹299</a></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 <script>
@@ -266,16 +359,36 @@ const CONFIG = {
   payee: 'Chitrakissa',            // name shown in the UPI app
   instagram: 'chitrakissa',        // Instagram handle, without @
 };
-document.querySelectorAll('.js-wa').forEach(a => a.href = `https://ig.me/m/${CONFIG.instagram}`);   // opens a DM in the Instagram app (no phone number needed)
-document.querySelectorAll('.js-tg').forEach(a => a.href = `https://t.me/${CONFIG.telegram}`);
+const IG = `https://ig.me/m/${CONFIG.instagram}`, TG = `https://t.me/${CONFIG.telegram}`;   // a DM in the Instagram app (no phone number needed)
 document.querySelectorAll('.js-ig').forEach(a => a.href = `https://instagram.com/${CONFIG.instagram}`);
+document.querySelectorAll('.js-tg').forEach(a => a.href = TG);
+
+// the order builder: the form writes the message; "Copy and open" puts it on the clipboard and opens the chat
+const f = document.getElementById('f'), m = document.getElementById('m');
+function message() {
+  const v = Object.fromEntries(new FormData(f)), L = ['Namaste Chitrakissa! 🪔', `I'd like a Diwali film: ${v.plan}`];
+  if (v.family) L.push(`Family: ${v.family}`); if (v.city) L.push(`City: ${v.city}`);
+  L.push(`World: ${v.world}`, `Language: ${v.lang}`);
+  if (v.people) L.push(`In it: ${v.people}`); if (v.dish) L.push(`Our Diwali dish: ${v.dish}`); if (v.line) L.push(`Our line: ${v.line}`);
+  L.push('', "I'll send our photos here.");
+  return L.join('\n');
+}
+const draw = () => m.textContent = message(); f.addEventListener('input', draw); draw();
+function copyThenOpen(text, url, btn) {   // start the copy and open the chat in the same tap: Safari blocks a window opened after an await
+  const done = () => { if (!btn) return; const t = btn.lastChild.textContent; btn.lastChild.textContent = 'Copied! Paste it in the chat'; setTimeout(() => btn.lastChild.textContent = t, 4000); };
+  try { navigator.clipboard.writeText(text).then(done, () => {}); } catch (e) {}
+  window.open(url, '_blank', 'noopener');
+}
+document.querySelector('.js-send').onclick = e => copyThenOpen(message(), IG, e.currentTarget);
+document.querySelector('.js-tg-send').onclick = e => { e.preventDefault(); copyThenOpen(message(), TG); };
+document.querySelectorAll('.js-ig-msg').forEach(a => a.onclick = e => { e.preventDefault(); copyThenOpen(a.dataset.msg, IG); });
+
+// UPI: the box appears once a real UPI ID is set
 const upi = `upi://pay?pa=${encodeURIComponent(CONFIG.upi)}&pn=${encodeURIComponent(CONFIG.payee)}&cu=INR`;
 document.querySelectorAll('.js-upi').forEach(a => a.href = upi);
 document.getElementById('upiId').textContent = CONFIG.upi;
-try { new QRious({ element: document.getElementById('qr'), value: upi, size: 112, foreground: '#1c1430' }); } catch (e) { document.getElementById('qr').remove(); }
-const hero = document.getElementById('hero'), sound = document.getElementById('sound');
-sound.onclick = () => { hero.muted = !hero.muted; if (!hero.muted) { hero.currentTime = 0; hero.play(); } sound.textContent = hero.muted ? 'Play with sound' : 'Mute'; };
-if (/your-upi/.test(CONFIG.upi)) document.querySelector('.last .pay').remove();   // the UPI box appears once a real UPI ID is set
+try { new QRious({ element: document.getElementById('qr'), value: upi, size: 112, foreground: '#1a1226' }); } catch (e) { document.getElementById('qr').remove(); }
+if (/your-upi/.test(CONFIG.upi)) document.querySelector('.last .pay').remove();
 </script>
 </body>
 </html>
