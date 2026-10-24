@@ -7,7 +7,7 @@
 <meta name="description" content="Painted Diwali films of your own family, in your city and your language, ready in 3 hours from ₹299. And your love story as a hand-painted comic. You see it before you pay.">
 <meta property="og:title" content="Chitrakissa — your story, painted">
 <meta property="og:description" content="Your family, painted into a Diwali film in 3 hours. From ₹299, pay after you see it.">
-<meta property="og:image" content="media/diwali_raos_poster.jpg">
+<meta property="og:image" content="media/diwali_mishras_poster.jpg">
 <meta name="theme-color" content="#1a1226">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;700&family=Rozha+One&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
@@ -92,6 +92,9 @@ section { padding: 84px 0; }
 @media (prefers-reduced-motion: reduce) { .film::before { animation: none; } }
 .film video { position: relative; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 22px; background: #000; box-shadow: 0 0 0 1px rgba(243, 185, 77, .3), 0 40px 80px -30px #000; }
 .sound { position: absolute; right: 12px; bottom: 12px; border: 0; cursor: pointer; border-radius: 999px; padding: 9px 14px; background: rgba(26, 18, 38, .75); color: var(--cream); font: 500 14px var(--body); backdrop-filter: blur(6px); }
+.regions { position: relative; z-index: 1; display: flex; gap: 6px; padding: 5px; margin: 0 auto 14px; width: max-content; max-width: 100%; border-radius: 999px; background: var(--raat-2); border: 1px solid var(--line); }
+.regions button { border: 0; cursor: pointer; border-radius: 999px; padding: 9px 16px; font: 600 15px var(--body); color: var(--cream-2); background: transparent; }
+.regions button[aria-selected="true"] { background: var(--diya); color: #2a1a05; }
 .film small { display: block; text-align: center; margin-top: 12px; font-size: 13px; color: var(--cream-3); position: relative; }
 .yours { list-style: none; padding: 0; margin: 0 0 30px; display: grid; gap: 18px; }
 .yours li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; }
@@ -209,7 +212,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14p
   <p class="lede">Elegant painted films and comics, made from your own photos, in your city and your language.</p>
   <div class="doors">
     <a class="door" href="#diwali">
-      <div class="pic"><video src="media/diwali_raos.mp4" poster="media/diwali_raos_poster.jpg" autoplay muted loop playsinline preload="metadata"></video></div>
+      <div class="pic"><video src="media/diwali_mishras.mp4" poster="media/diwali_mishras_poster.jpg" autoplay muted loop playsinline preload="metadata"></video></div>
       <div class="txt"><span class="ribbon">Diwali · 8 Nov</span><h3>A Diwali film of your family</h3><p>Your faces lit in the windows of a painted home. Your dish, your rangoli, your city's sky, a greeting in your language.</p>
         <span class="meta">From ₹299 · ready in 3 hours</span><span class="btn go">Make our Diwali film</span></div>
     </a>
@@ -224,8 +227,12 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14p
 
 <section class="diwali" id="diwali"><div class="wrap grid">
   <div class="film">
-    <video id="raos" src="media/diwali_raos.mp4" poster="media/diwali_raos_poster.jpg" controls playsinline preload="none"></video>
-    <small>Sample: "the Raos of Vijayawada", made from 4 stock photos</small>
+    <div class="regions" role="tablist" aria-label="Sample films by region">
+      <button type="button" role="tab" aria-selected="true" data-src="media/diwali_mishras.mp4" data-poster="media/diwali_mishras_poster.jpg" data-cap="the Mishras of Varanasi · Hindi">North · Varanasi</button>
+      <button type="button" role="tab" aria-selected="false" data-src="media/diwali_raos.mp4" data-poster="media/diwali_raos_poster.jpg" data-cap="the Raos of Vijayawada · Telugu">South · Vijayawada</button>
+    </div>
+    <video id="sample" src="media/diwali_mishras.mp4" poster="media/diwali_mishras_poster.jpg" controls playsinline preload="none"></video>
+    <small>Sample: "<span id="cap">the Mishras of Varanasi · Hindi</span>", made from stock photos</small>
   </div>
   <div>
     <div class="head"><span class="eyebrow">Diwali film</span><h2>Made of your family, not a template.</h2></div>
@@ -347,7 +354,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14p
   <div class="pay"><canvas id="qr" width="112" height="112" aria-label="UPI QR code"></canvas><p>After your preview, pay by UPI to<br><b id="upiId"></b><br><a class="js-upi" href="#">Open your UPI app</a></p></div>
 </div></section>
 
-<footer><div class="wrap">Chitrakissa, your story painted. Instagram <a class="js-ig" href="#">@chitrakissa</a>. The sample film uses free Unsplash stock photos (photo by CR); sample comics show made-up people.</div></footer>
+<footer><div class="wrap">Chitrakissa, your story painted. Instagram <a class="js-ig" href="#">@chitrakissa</a>. Sample films use free stock photos (Unsplash: CR; Pexels: RDNE Stock project); sample comics show made-up people.</div></footer>
 <div class="dock"><a class="btn" href="#order">🪔 Make our Diwali film, from ₹299</a></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
@@ -383,6 +390,12 @@ document.querySelector('.js-send').onclick = e => copyThenOpen(message(), IG, e.
 document.querySelector('.js-tg-send').onclick = e => { e.preventDefault(); copyThenOpen(message(), TG); };
 document.querySelectorAll('.js-ig-msg').forEach(a => a.onclick = e => { e.preventDefault(); copyThenOpen(a.dataset.msg, IG); });
 
+// the sample film: pick a region
+const sample = document.getElementById('sample');
+document.querySelectorAll('.regions button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.regions button').forEach(x => x.setAttribute('aria-selected', x === b));
+  sample.poster = b.dataset.poster; sample.src = b.dataset.src; document.getElementById('cap').textContent = b.dataset.cap;
+});
 // UPI: the box appears once a real UPI ID is set
 const upi = `upi://pay?pa=${encodeURIComponent(CONFIG.upi)}&pn=${encodeURIComponent(CONFIG.payee)}&cu=INR`;
 document.querySelectorAll('.js-upi').forEach(a => a.href = upi);
